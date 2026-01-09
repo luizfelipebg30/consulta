@@ -95,17 +95,23 @@
             const regexMercosul = /^[A-Z]{3}\d[A-Z]\d{2}$/;
             const regexAntiga = /^[A-Z]{3}\d{4}$/;
 
+            let url = '';
+
             if (regexMercosul.test(placaLimpa)) {
-                window.location.href =
-                    `http://fiscaldasestradas.sp.gov.br/sisf-ws/rest/sigatc/consulta/${placaLimpa}`;
+                url = `http://fiscaldasestradas.sp.gov.br/sisf-ws/rest/sigatc/consulta/${placaLimpa}`;
+
             } else if (regexAntiga.test(placaLimpa)) {
                 const parteInicial = placaLimpa.slice(0, 3);
                 const parteFinal = placaLimpa.slice(3);
-                window.location.href =
-                    `http://fiscaldasestradas.sp.gov.br/sisf-ws/rest/sigatc/consulta/${parteInicial}-${parteFinal}`;
+                url = `http://fiscaldasestradas.sp.gov.br/sisf-ws/rest/sigatc/consulta/${parteInicial}-${parteFinal}`;
+
             } else {
                 alert('Placa inválida! Verifique o formato.');
+                return;
             }
+
+            // Abre SOMENTE em nova aba (a página atual permanece intacta)
+            window.open(url, '_blank');
         }
     </script>
 
